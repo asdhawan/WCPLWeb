@@ -1,0 +1,79 @@
+﻿@model WCPLWebClasses.SpecialEvent
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    a#btnEvent {
+        padding: 10px;
+        height: 100px;
+    }
+
+    div#datesBlock {
+        width: 100px;
+        height: 80px;
+        border: solid 1px black;
+        float: left;
+        display: inline-block;
+    }
+
+        div#datesBlock span#month {
+            text-transform: uppercase;
+            vertical-align: bottom;
+        }
+
+        div#datesBlock span#days {
+            font-size: 1.5em;
+            line-height: 2.0em;
+        }
+
+</style>
+<script type="text/javascript">
+
+    function getEvents(clbk) {
+        $.getJSON("/api/events")
+            .done(function (data) {
+                clbk(data);
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                showErrorMessage("getEvents", "ERROR", 'Status: ' + textStatus + ', Error: ' + errorThrown);
+            });
+    }
+
+    function clbk_getEvents(data) {
+        var hrefeventList = $(eventList);
+        hrefeventList.empty();
+
+        $.each(data, function (key, item) {
+            var btnEvent = $('#btnEvent').clone().show();
+            var li = $("<li class='list-group-item' />");
+            //var aBtn = $('<a href="#" target="_self" class="btn btn-lg btn-default" />');
+            //aBtn.append()
+            //li.append($('<a href="#" target="_self" class="btn btn-lg btn-default" />').text(item.eventName));
+            btnEvent.find('#eventInfo').text(item.eventName);
+            li.append(btnEvent);
+            hrefeventList.append(li);
+        });
+    }
+
+    //This will run when the web page has completly loaded
+    $(document).ready(function () {
+        getEvents(clbk_getEvents);
+    });
+</script>
+<div class="panel panel-primary">
+    <div class="panel-heading">Upcoming Events</div>
+    <div class="panel-body">
+        <br />
+        <ul id="eventList" class="list-group"></ul>
+    </div>
+</div>
+<a id="btnEvent" style="display: none;" href="#" target="_self" class="btn btn-lg btn-block btn-default">
+    <div id="datesBlock">
+        <span id="month" class="label label-primary">MAY 2018</span><br />
+        <span id="days">14-20</span><br />
+    </div>
+    <div id="eventInfo">
+
+    </div>
+</a>

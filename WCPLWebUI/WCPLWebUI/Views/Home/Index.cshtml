@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style type="text/css">
+    .jumbotron {
+        background-color: black;
+        color: white;
+    }
+
+        .jumbotron img {
+            width: 300px;
+        }
+
+    .fb-link img {
+        width: 200px;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-lg-4"><img src="~/Content/images/wcpl.jpg" alt="West Coast Poker League" /></div>
+        <div class="col-lg-8">
+            <p>
+                The West Coast Poker League is the largest bar poker league in California.  Come play a game at any of our bars in California and you will find all levels of players.  We have players who are just learning the sport, to competitive players who play in larger tournaments such as the WSOP, and in card rooms all over the US.
+                @Html.ActionLink("See More...", "About", "Home")
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Season Info</h2>
+        <p>
+            We are currently in Season 29 which runs from <br />January 1, 2018 to March 31, 2018.<br /><br />Main Event for this season will be on April 14, 2018
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Today's Games</h2>
+        <p>
+            Coming soon...
+            @Html.ActionLink("See More...", "Index", "Games")
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Join Us</h2>
+        <a href="https://www.facebook.com/groups/westcoastpokerleague" target="_blank" class="btn btn-lg btn-default fb-link"><img src="~/Content/images/FB-FindUsonFacebook-online-512.png" /></a>
+    </div>
+</div>

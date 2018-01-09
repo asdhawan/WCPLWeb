@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wcplModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ExternalLeague">
+          <Key>
+            <PropertyRef Name="ExternalLeagueId" />
+          </Key>
+          <Property Name="ExternalLeagueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExternalLeagueName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player_External">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="ExternalLeagueId" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player_SpecialEvent">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="SpecialEventId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="SpecialEventId" Type="int" Nullable="false" />
+          <Property Name="PaidYN" Type="bit" Nullable="false" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="AmountPaid" Type="money" />
+        </EntityType>
+        <EntityType Name="SpecialEvent">
+          <Key>
+            <PropertyRef Name="SpecialEventId" />
+          </Key>
+          <Property Name="SpecialEventId" Type="int" Nullable="false" />
+          <Property Name="EventName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="EntryFeeYN" Type="bit" Nullable="false" />
+          <Property Name="EntryFeeAmount" Type="money" />
+          <Property Name="EntryFeeAmountOnline" Type="money" />
+          <Property Name="RegistrationRequiredYN" Type="bit" Nullable="false" />
+          <Property Name="RegistrationStartDate" Type="datetime" />
+          <Property Name="RegistrationEndDate" Type="datetime" />
+          <Property Name="CustomPageURL" Type="varchar" MaxLength="255" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="MultiLeagueEventYN" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpecialEvent_ExternalLeague">
+          <Key>
+            <PropertyRef Name="SpecialEventId" />
+            <PropertyRef Name="ExternalLeagueId" />
+          </Key>
+          <Property Name="SpecialEventId" Type="int" Nullable="false" />
+          <Property Name="ExternalLeagueId" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Player_External_ExternalLeague">
+          <End Role="ExternalLeague" Type="Self.ExternalLeague" Multiplicity="1" />
+          <End Role="Player_External" Type="Self.Player_External" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Principal>
+            <Dependent Role="Player_External">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_External_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Player_External" Type="Self.Player_External" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Player_External">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_SpecialEvent_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Player_SpecialEvent" Type="Self.Player_SpecialEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Player_SpecialEvent">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_SpecialEvent_SpecialEvent">
+          <End Role="SpecialEvent" Type="Self.SpecialEvent" Multiplicity="1" />
+          <End Role="Player_SpecialEvent" Type="Self.Player_SpecialEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Principal>
+            <Dependent Role="Player_SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialEvent_ExternalLeague_ExternalLeague">
+          <End Role="ExternalLeague" Type="Self.ExternalLeague" Multiplicity="1" />
+          <End Role="SpecialEvent_ExternalLeague" Type="Self.SpecialEvent_ExternalLeague" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Principal>
+            <Dependent Role="SpecialEvent_ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialEvent_ExternalLeague_SpecialEvent">
+          <End Role="SpecialEvent" Type="Self.SpecialEvent" Multiplicity="1" />
+          <End Role="SpecialEvent_ExternalLeague" Type="Self.SpecialEvent_ExternalLeague" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Principal>
+            <Dependent Role="SpecialEvent_ExternalLeague">
+              <PropertyRef Name="SpecialEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wcplModelStoreContainer">
+          <EntitySet Name="ExternalLeague" EntityType="Self.ExternalLeague" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player_External" EntityType="Self.Player_External" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player_SpecialEvent" EntityType="Self.Player_SpecialEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialEvent" EntityType="Self.SpecialEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialEvent_ExternalLeague" EntityType="Self.SpecialEvent_ExternalLeague" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Player_External_ExternalLeague" Association="Self.FK_Player_External_ExternalLeague">
+            <End Role="ExternalLeague" EntitySet="ExternalLeague" />
+            <End Role="Player_External" EntitySet="Player_External" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_External_Player" Association="Self.FK_Player_External_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Player_External" EntitySet="Player_External" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_SpecialEvent_Player" Association="Self.FK_Player_SpecialEvent_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Player_SpecialEvent" EntitySet="Player_SpecialEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_SpecialEvent_SpecialEvent" Association="Self.FK_Player_SpecialEvent_SpecialEvent">
+            <End Role="SpecialEvent" EntitySet="SpecialEvent" />
+            <End Role="Player_SpecialEvent" EntitySet="Player_SpecialEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialEvent_ExternalLeague_ExternalLeague" Association="Self.FK_SpecialEvent_ExternalLeague_ExternalLeague">
+            <End Role="ExternalLeague" EntitySet="ExternalLeague" />
+            <End Role="SpecialEvent_ExternalLeague" EntitySet="SpecialEvent_ExternalLeague" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialEvent_ExternalLeague_SpecialEvent" Association="Self.FK_SpecialEvent_ExternalLeague_SpecialEvent">
+            <End Role="SpecialEvent" EntitySet="SpecialEvent" />
+            <End Role="SpecialEvent_ExternalLeague" EntitySet="SpecialEvent_ExternalLeague" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wcplModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ExternalLeague">
+          <Key>
+            <PropertyRef Name="ExternalLeagueId" />
+          </Key>
+          <Property Name="ExternalLeagueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExternalLeagueName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Player_External" Relationship="Self.FK_Player_External_ExternalLeague" FromRole="ExternalLeague" ToRole="Player_External" />
+          <NavigationProperty Name="SpecialEvent_ExternalLeague" Relationship="Self.FK_SpecialEvent_ExternalLeague_ExternalLeague" FromRole="ExternalLeague" ToRole="SpecialEvent_ExternalLeague" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Player_External" Relationship="Self.FK_Player_External_Player" FromRole="Player" ToRole="Player_External" />
+          <NavigationProperty Name="Player_SpecialEvent" Relationship="Self.FK_Player_SpecialEvent_Player" FromRole="Player" ToRole="Player_SpecialEvent" />
+        </EntityType>
+        <EntityType Name="Player_External">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="ExternalLeagueId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ExternalLeague" Relationship="Self.FK_Player_External_ExternalLeague" FromRole="Player_External" ToRole="ExternalLeague" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_Player_External_Player" FromRole="Player_External" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Player_SpecialEvent">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="SpecialEventId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialEventId" Type="Int32" Nullable="false" />
+          <Property Name="PaidYN" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_Player_SpecialEvent_Player" FromRole="Player_SpecialEvent" ToRole="Player" />
+          <NavigationProperty Name="SpecialEvent" Relationship="Self.FK_Player_SpecialEvent_SpecialEvent" FromRole="Player_SpecialEvent" ToRole="SpecialEvent" />
+        </EntityType>
+        <EntityType Name="SpecialEvent">
+          <Key>
+            <PropertyRef Name="SpecialEventId" />
+          </Key>
+          <Property Name="SpecialEventId" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EntryFeeYN" Type="Boolean" Nullable="false" />
+          <Property Name="EntryFeeAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="EntryFeeAmountOnline" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegistrationRequiredYN" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationStartDate" Type="DateTime" Precision="3" />
+          <Property Name="RegistrationEndDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomPageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MultiLeagueEventYN" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Player_SpecialEvent" Relationship="Self.FK_Player_SpecialEvent_SpecialEvent" FromRole="SpecialEvent" ToRole="Player_SpecialEvent" />
+          <NavigationProperty Name="SpecialEvent_ExternalLeague" Relationship="Self.FK_SpecialEvent_ExternalLeague_SpecialEvent" FromRole="SpecialEvent" ToRole="SpecialEvent_ExternalLeague" />
+        </EntityType>
+        <EntityType Name="SpecialEvent_ExternalLeague">
+          <Key>
+            <PropertyRef Name="SpecialEventId" />
+            <PropertyRef Name="ExternalLeagueId" />
+          </Key>
+          <Property Name="SpecialEventId" Type="Int32" Nullable="false" />
+          <Property Name="ExternalLeagueId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ExternalLeague" Relationship="Self.FK_SpecialEvent_ExternalLeague_ExternalLeague" FromRole="SpecialEvent_ExternalLeague" ToRole="ExternalLeague" />
+          <NavigationProperty Name="SpecialEvent" Relationship="Self.FK_SpecialEvent_ExternalLeague_SpecialEvent" FromRole="SpecialEvent_ExternalLeague" ToRole="SpecialEvent" />
+        </EntityType>
+        <Association Name="FK_Player_External_ExternalLeague">
+          <End Role="ExternalLeague" Type="Self.ExternalLeague" Multiplicity="1" />
+          <End Role="Player_External" Type="Self.Player_External" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Principal>
+            <Dependent Role="Player_External">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialEvent_ExternalLeague_ExternalLeague">
+          <End Role="ExternalLeague" Type="Self.ExternalLeague" Multiplicity="1" />
+          <End Role="SpecialEvent_ExternalLeague" Type="Self.SpecialEvent_ExternalLeague" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Principal>
+            <Dependent Role="SpecialEvent_ExternalLeague">
+              <PropertyRef Name="ExternalLeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_External_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Player_External" Type="Self.Player_External" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Player_External">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_SpecialEvent_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Player_SpecialEvent" Type="Self.Player_SpecialEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Player_SpecialEvent">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_SpecialEvent_SpecialEvent">
+          <End Role="SpecialEvent" Type="Self.SpecialEvent" Multiplicity="1" />
+          <End Role="Player_SpecialEvent" Type="Self.Player_SpecialEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Principal>
+            <Dependent Role="Player_SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialEvent_ExternalLeague_SpecialEvent">
+          <End Role="SpecialEvent" Type="Self.SpecialEvent" Multiplicity="1" />
+          <End Role="SpecialEvent_ExternalLeague" Type="Self.SpecialEvent_ExternalLeague" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialEvent">
+              <PropertyRef Name="SpecialEventId" />
+            </Principal>
+            <Dependent Role="SpecialEvent_ExternalLeague">
+              <PropertyRef Name="SpecialEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wcplDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ExternalLeagues" EntityType="Self.ExternalLeague" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="Player_External" EntityType="Self.Player_External" />
+          <EntitySet Name="Player_SpecialEvent" EntityType="Self.Player_SpecialEvent" />
+          <EntitySet Name="SpecialEvents" EntityType="Self.SpecialEvent" />
+          <EntitySet Name="SpecialEvent_ExternalLeague" EntityType="Self.SpecialEvent_ExternalLeague" />
+          <AssociationSet Name="FK_Player_External_ExternalLeague" Association="Self.FK_Player_External_ExternalLeague">
+            <End Role="ExternalLeague" EntitySet="ExternalLeagues" />
+            <End Role="Player_External" EntitySet="Player_External" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialEvent_ExternalLeague_ExternalLeague" Association="Self.FK_SpecialEvent_ExternalLeague_ExternalLeague">
+            <End Role="ExternalLeague" EntitySet="ExternalLeagues" />
+            <End Role="SpecialEvent_ExternalLeague" EntitySet="SpecialEvent_ExternalLeague" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_External_Player" Association="Self.FK_Player_External_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Player_External" EntitySet="Player_External" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_SpecialEvent_Player" Association="Self.FK_Player_SpecialEvent_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Player_SpecialEvent" EntitySet="Player_SpecialEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_SpecialEvent_SpecialEvent" Association="Self.FK_Player_SpecialEvent_SpecialEvent">
+            <End Role="SpecialEvent" EntitySet="SpecialEvents" />
+            <End Role="Player_SpecialEvent" EntitySet="Player_SpecialEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialEvent_ExternalLeague_SpecialEvent" Association="Self.FK_SpecialEvent_ExternalLeague_SpecialEvent">
+            <End Role="SpecialEvent" EntitySet="SpecialEvents" />
+            <End Role="SpecialEvent_ExternalLeague" EntitySet="SpecialEvent_ExternalLeague" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wcplModelStoreContainer" CdmEntityContainer="wcplDbEntities">
+          <EntitySetMapping Name="ExternalLeagues">
+            <EntityTypeMapping TypeName="wcplModel.ExternalLeague">
+              <MappingFragment StoreEntitySet="ExternalLeague">
+                <ScalarProperty Name="ExternalLeagueId" ColumnName="ExternalLeagueId" />
+                <ScalarProperty Name="ExternalLeagueName" ColumnName="ExternalLeagueName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="wcplModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player_External">
+            <EntityTypeMapping TypeName="wcplModel.Player_External">
+              <MappingFragment StoreEntitySet="Player_External">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ExternalLeagueId" ColumnName="ExternalLeagueId" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player_SpecialEvent">
+            <EntityTypeMapping TypeName="wcplModel.Player_SpecialEvent">
+              <MappingFragment StoreEntitySet="Player_SpecialEvent">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="SpecialEventId" ColumnName="SpecialEventId" />
+                <ScalarProperty Name="PaidYN" ColumnName="PaidYN" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialEvents">
+            <EntityTypeMapping TypeName="wcplModel.SpecialEvent">
+              <MappingFragment StoreEntitySet="SpecialEvent">
+                <ScalarProperty Name="SpecialEventId" ColumnName="SpecialEventId" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="EntryFeeYN" ColumnName="EntryFeeYN" />
+                <ScalarProperty Name="EntryFeeAmount" ColumnName="EntryFeeAmount" />
+                <ScalarProperty Name="EntryFeeAmountOnline" ColumnName="EntryFeeAmountOnline" />
+                <ScalarProperty Name="RegistrationRequiredYN" ColumnName="RegistrationRequiredYN" />
+                <ScalarProperty Name="RegistrationStartDate" ColumnName="RegistrationStartDate" />
+                <ScalarProperty Name="RegistrationEndDate" ColumnName="RegistrationEndDate" />
+                <ScalarProperty Name="CustomPageURL" ColumnName="CustomPageURL" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="MultiLeagueEventYN" ColumnName="MultiLeagueEventYN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialEvent_ExternalLeague">
+            <EntityTypeMapping TypeName="wcplModel.SpecialEvent_ExternalLeague">
+              <MappingFragment StoreEntitySet="SpecialEvent_ExternalLeague">
+                <ScalarProperty Name="SpecialEventId" ColumnName="SpecialEventId" />
+                <ScalarProperty Name="ExternalLeagueId" ColumnName="ExternalLeagueId" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

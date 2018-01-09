@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CommonEFUtils/CommonEFUtils/bin
+/CommonEFUtils/CommonEFUtils/obj
+/CommonUtils/CommonUtils/bin
+/CommonUtils/CommonUtils/obj
+*.vspscc
+/WCPLWebClasses/bin
+/WCPLWebClasses/obj
+/WCPLWebEntities/bin
+/WCPLWebEntities/docs
+/WCPLWebEntities/obj
+/WCPLWebUI/.vs
+/WCPLWebUI/WCPLWebUI/bin
+/WCPLWebUI/WCPLWebUI/docs
+/WCPLWebUI/WCPLWebUI/obj

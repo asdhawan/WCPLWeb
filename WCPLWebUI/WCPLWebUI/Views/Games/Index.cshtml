@@ -1,0 +1,134 @@
+﻿@model WCPLWebClasses.SpecialEvent
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+                            //function getEvents(clbk) {
+                            //    $.getJSON("/api/events")
+                            //        .done(function (data) {
+                            //            clbk(data);
+                            //        })
+                            //        .fail(function (jqXHR, textStatus, errorThrown) {
+                            //            showErrorMessage("getEvents", "ERROR", 'Status: ' + textStatus + ', Error: ' + errorThrown);
+                            //        });
+                            //}
+
+                            //function clbk_getEvents(data) {
+                            //    var hrefeventList = $(eventList);
+                            //    hrefeventList.empty();
+
+                            //    $.each(data, function (key, item) {
+                            //        hrefeventList.append($("<div class='col-xs-7 col-sm-7 col-md-7' />").append($('<b />').text(item.eventName)));
+                            //    });
+                            //}
+
+                            ////This will run when the web page has completly loaded
+                            //$(document).ready(function () {
+                            //    getEvents(clbk_getEvents);
+                            //});
+</script>
+<style type="text/css">
+    .dayLabel {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        transform: rotate(-90deg);
+    }
+</style>
+<div class="panel panel-primary">
+    <div class="panel-heading">Game Schedule</div>
+    <div class="panel-body">
+        <br />
+        <div id="eventList">
+            <div class="panel panel-success">
+                <div class="panel-heading">SATURDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">12:00pm ~ Mojos Lounge, 3714 Peralta Blvd., Fremont</li>
+                        <li class="list-group-item">1:00pm ~ Smokehouse 126 Quail Oaks Rd, Valley Springs, CA 95252</li>
+                        <li class="list-group-item">12:00pm ~ Spinnakers, 2031 Yosemite Ave., Modesto</li>
+                        <li class="list-group-item">2:00pm ~ Str8 Shooter, 1072 E. Monte Vista Ave., Vacaville</li>
+                        <li class="list-group-item">3:00pm ~ Battered Beaver, 108 N. Yosemite Ave., Oakdale</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">SUNDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">12:00pm ~ Spinnakers, 2031 Yosemite Ave., Modesto</li>
+                        <li class="list-group-item">2:00pm ~ OSullivans, 5660 Thornton Ave, Newark</li>
+                        <li class="list-group-item">1:30pm ~ Oakdale Sports Bar, 9831 Valley Home Rd. (Hwy 120), Oakdale</li>
+                        <li class="list-group-item">6:15pm ~ Valley Inn, 1744 Main St., Escalon</li>
+                        <li class="list-group-item">7:00pm ~ Str8 Shooter, 1072 E. Monte Vista Ave., Vacaville</li>
+                        <li class="list-group-item">7:00pm ~ Cunha's, 155 Pelton center way, San leandro CA 94577</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">MONDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">6:00pm ~ El Torero, 2869 W Hwy 12, Valley Springs, CA 95252</li>
+                        <li class="list-group-item">6:00pm ~ French Camp Sports Bar and Grill 3919 French Camp Rd, Manteca, CA 95336</li>
+                        <li class="list-group-item">7:00pm ~ Shooters Pub and Grill at the Clarion Hotel 1612 Sisk Rd, Modesto, CA 95350</li>
+                        <li class="list-group-item">7:00pm ~ KOES Bar, 10200 N. Hwy 99 Stockton,</li>
+                        <li class="list-group-item">7:00pm ~ Battered Beaver, 108 N Yosemite Ave., Oakdale</li>
+                        <li class="list-group-item">7:00pm ~ Mojos Lounge, 3714 Peralta Blvd., Fremont</li>
+                        <li class="list-group-item">7:30pm ~ Masses Sports Bar & Grill, 2721 N. Main St., Walnut Creek</li>
+                        <li class="list-group-item">7:30pm ~ Str8 Shooter, 1072 E. Monte Vista Ave., Vacaville</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">TUESDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">7:00pm ~ Oakdale Sports Bar, 9831 Valley Home Rd. (Hwy 120), Oakdale</li>
+                        <li class="list-group-item">7:00pm ~ The Other Place, 2003 Yosemite Blvd., Modesto</li>
+                        <li class="list-group-item">7:00pm ~ Swiss Park, 5911 Mowry Ave., Newark</li>
+                        <li class="list-group-item">7:00pm ~ Hide-A-Way Bar and Grill, 1080 Orange Dr., Vacaville</li>
+                        <li class="list-group-item">7:00pm ~ Swiss Buda, 2342 Fruitridge Rd., Sacramento</li>
+                        <li class="list-group-item">7:00pm ~ Cunha's, 155 Pelton center way, San leandro CA 94577</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">WEDNESDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">6:00pm ~ French Camp Sports Bar and Grill 3919 French Camp Rd, Manteca, CA 95336</li>
+                        <li class="list-group-item">7:00pm ~ The Other Place, 2003 Yosemite Blvd., Modesto</li>
+                        <li class="list-group-item">7:00pm ~ Battered Beaver, 108 N Yosemite Ave., Oakdale</li>
+                        <li class="list-group-item">7:00pm ~ OSullivans , 5660 Thornton Ave, Newark</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">THURSDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">6:00pm ~ Smokehouse 126 Quail Oaks Rd, Valley Springs, CA 95252</li>
+                        <li class="list-group-item">6:00pm ~ Starlite Room 140 El Portal Ave Manteca, CA 95337</li>
+                        <li class="list-group-item">7:00pm ~ Oakdale Sports Bar, 9831 Valley Home Rd. (Hwy 120), Oakdale</li>
+                        <li class="list-group-item">7:00pm ~ The Other Place, 2003 Yosemite Blvd., Modesto</li>
+                        <li class="list-group-item">7:00pm ~ Fog Line Bar and Grill 25037 Clawiter Rd, Hayward, CA 94545</li>
+                        <li class="list-group-item">7:00pm ~ The Grant Bar, 2706 Pavilion Pkwy, Tracy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">FRIDAY</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">2:30pm ~ Cunha's, 155 Pelton center way, San leandro CA 94577</li>
+                        <li class="list-group-item">7:00pm ~ Haven Acres Marina Bar & Grill,1691 Frewert Rd., Lathrop</li>
+                        <li class="list-group-item">7:30pm ~ Str8 Shooter, 1072 E. Monte Vista Ave., Vacaville</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

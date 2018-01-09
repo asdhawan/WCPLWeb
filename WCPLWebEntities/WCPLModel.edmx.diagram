@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="31898f77cf9b410fac5918120cd58154" Name="Diagram1">
+        <EntityTypeShape EntityType="wcplModel.ExternalLeague" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="wcplModel.Player" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wcplModel.Player_External" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="wcplModel.Player_SpecialEvent" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="wcplModel.SpecialEvent" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="wcplModel.SpecialEvent_ExternalLeague" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="wcplModel.FK_Player_External_ExternalLeague" ManuallyRouted="false" />
+        <AssociationConnector Association="wcplModel.FK_SpecialEvent_ExternalLeague_ExternalLeague" ManuallyRouted="false" />
+        <AssociationConnector Association="wcplModel.FK_Player_External_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="wcplModel.FK_Player_SpecialEvent_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="wcplModel.FK_Player_SpecialEvent_SpecialEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="wcplModel.FK_SpecialEvent_ExternalLeague_SpecialEvent" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
