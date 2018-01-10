@@ -34,6 +34,8 @@ namespace WCPLWebEntities
         public string CustomPageURL { get; set; }
         public System.DateTime CreateDateTime { get; set; }
         public bool MultiLeagueEventYN { get; set; }
+        public string EventSubtitle { get; set; }
+        public string EventDesc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Player_SpecialEvent> Player_SpecialEvent { get; set; }

@@ -4,29 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style type="text/css">
-    a#btnEvent {
+    div#eventDiv {
         padding: 10px;
-        height: 100px;
     }
 
     div#datesBlock {
-        width: 100px;
-        height: 80px;
+        /*height: 80px;*/
         border: solid 1px black;
-        float: left;
-        display: inline-block;
+        /*float: left;
+        display: inline-block;*/
+        text-align: center;
+        padding-bottom: 15px;
     }
 
         div#datesBlock span#month {
-            text-transform: uppercase;
-            vertical-align: bottom;
+            text-transform: capitalize;
         }
 
         div#datesBlock span#days {
-            font-size: 1.5em;
-            line-height: 2.0em;
+            font-size: 1.25em;
         }
 
+    div#eventInfo {
+        text-align: left;
+    }
+
+        div#eventInfo span#eventName {
+            font-weight: bold;
+            font-size: 1.75em;
+            font-variant: small-caps;
+        }
+
+    div#eventDesc {
+        font-size: 0.85em;
+    }
 </style>
 <script type="text/javascript">
 
@@ -45,13 +56,17 @@
         hrefeventList.empty();
 
         $.each(data, function (key, item) {
-            var btnEvent = $('#btnEvent').clone().show();
+            var eventDiv = $('#eventDiv').clone().show();
             var li = $("<li class='list-group-item' />");
             //var aBtn = $('<a href="#" target="_self" class="btn btn-lg btn-default" />');
             //aBtn.append()
             //li.append($('<a href="#" target="_self" class="btn btn-lg btn-default" />').text(item.eventName));
-            btnEvent.find('#eventInfo').text(item.eventName);
-            li.append(btnEvent);
+            eventDiv.find('#month').text(item.monthYear);
+            eventDiv.find('#days').text(item.days);
+            eventDiv.find('#eventName').text(item.eventName);
+            //eventDiv.find('#eventSubTitle').text(item.eventSubTitle);
+            eventDiv.find('#eventDesc').text(item.eventDesc);
+            li.append(eventDiv);
             hrefeventList.append(li);
         });
     }
@@ -68,12 +83,21 @@
         <ul id="eventList" class="list-group"></ul>
     </div>
 </div>
-<a id="btnEvent" style="display: none;" href="#" target="_self" class="btn btn-lg btn-block btn-default">
-    <div id="datesBlock">
-        <span id="month" class="label label-primary">MAY 2018</span><br />
-        <span id="days">14-20</span><br />
+<a id="btnEvent" style="display: none;" href="#" target="_self" class="btn btn-lg btn-block btn-default"></a>
+<div id="eventDiv" class="row" style="display: none;">
+    <div id="datesBlock" class="col-lg-1 col-md-2 col-sm-4 col-xs-12">
+        <span id="month" class="label label-primary text-center"></span><br />
+        <span id="days"></span>
     </div>
-    <div id="eventInfo">
+    <div id="eventInfo" class="col-lg-3 col-md-4 col-sm-8 col-xs-12">
+        <span id="eventName"></span><br />
+        @*<span class="hidden-lg visible-md"><span id="eventSubTitle"></span><br /></span>*@
 
+        <div class="btn-group-sm">
+            <a href="#" class="btn btn-info">Details</a>
+            <a href="#" class="btn btn-success">Register Now</a>
+        </div>
     </div>
-</a>
+    <div id="eventDesc" class="col-lg-8 col-md-6 hidden-sm hidden-xs text-muted">
+    </div>
+</div>

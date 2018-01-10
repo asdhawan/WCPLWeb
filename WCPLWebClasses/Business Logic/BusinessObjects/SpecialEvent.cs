@@ -7,6 +7,8 @@ namespace WCPLWebClasses {
         [System.ComponentModel.DataAnnotations.Key]
         public int SpecialEventId { get; set; }
         public string EventName { get; set; }
+        public string EventSubTitle { get; set; }
+        public string EventDesc { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool EntryFeeYN { get; set; }
@@ -18,6 +20,8 @@ namespace WCPLWebClasses {
         public string CustomPageURL { get; set; }
         public DateTime CreateDateTime { get; set; }
         public bool MultiLeagueEventYN { get; set; }
+        public string MonthYear { get { return string.Format("{0:MMM} {0:yyyy}", StartDate); } }
+        public string Days { get { return StartDate.Day == EndDate.Day ? string.Format("{0:dd}", StartDate) : string.Format("{0:dd} - {1:dd}", StartDate, EndDate); } }
 
         //Public Methods
         public override void Update() { daSpecialEvent.Update(this); }

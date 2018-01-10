@@ -45,8 +45,10 @@
           <Key>
             <PropertyRef Name="SpecialEventId" />
           </Key>
-          <Property Name="SpecialEventId" Type="int" Nullable="false" />
+          <Property Name="SpecialEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EventSubtitle" Type="varchar" MaxLength="255" />
+          <Property Name="EventDesc" Type="varchar(max)" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="EntryFeeYN" Type="bit" Nullable="false" />
@@ -239,6 +241,8 @@
           <Property Name="MultiLeagueEventYN" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Player_SpecialEvent" Relationship="Self.FK_Player_SpecialEvent_SpecialEvent" FromRole="SpecialEvent" ToRole="Player_SpecialEvent" />
           <NavigationProperty Name="SpecialEvent_ExternalLeague" Relationship="Self.FK_SpecialEvent_ExternalLeague_SpecialEvent" FromRole="SpecialEvent" ToRole="SpecialEvent_ExternalLeague" />
+          <Property Name="EventSubtitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EventDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SpecialEvent_ExternalLeague">
           <Key>
@@ -403,6 +407,8 @@
           <EntitySetMapping Name="SpecialEvents">
             <EntityTypeMapping TypeName="wcplModel.SpecialEvent">
               <MappingFragment StoreEntitySet="SpecialEvent">
+                <ScalarProperty Name="EventDesc" ColumnName="EventDesc" />
+                <ScalarProperty Name="EventSubtitle" ColumnName="EventSubtitle" />
                 <ScalarProperty Name="SpecialEventId" ColumnName="SpecialEventId" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
