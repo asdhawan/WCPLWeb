@@ -223,11 +223,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\aces.svg" />
     <Content Include="Content\images\bg-textured.jpg" />
     <Content Include="Content\images\bgtile.png" />
     <Content Include="Content\images\cardbgtile.png" />
     <Content Include="Content\images\cardsbackground.svg" />
+    <Content Include="Content\images\FB-FindUsonFacebook-online-144.png" />
     <Content Include="Content\images\FB-FindUsonFacebook-online-512.png" />
     <Content Include="Content\images\fg-pattern.svg" />
     <Content Include="Content\images\wcpl.jpg" />
@@ -244,6 +247,7 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -281,6 +285,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\documents\rules.pdf" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\WCPLWebUI - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WCPLWebUI20180108041359 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />

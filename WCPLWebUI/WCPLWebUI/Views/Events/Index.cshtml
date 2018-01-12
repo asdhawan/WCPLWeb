@@ -17,11 +17,11 @@
         padding-bottom: 15px;
     }
 
-        div#datesBlock span#month {
-            text-transform: capitalize;
+        span#month {
+            text-transform: uppercase;
         }
 
-        div#datesBlock span#days {
+        span#days {
             font-size: 1.25em;
         }
 
@@ -37,6 +37,13 @@
 
     div#eventDesc {
         font-size: 0.85em;
+    }
+
+    div#eventDates .panel-heading {
+        padding: 0;
+    }
+    div#eventDates .panel-body {
+        padding: 10px 0;
     }
 </style>
 <script type="text/javascript">
@@ -85,11 +92,18 @@
 </div>
 <a id="btnEvent" style="display: none;" href="#" target="_self" class="btn btn-lg btn-block btn-default"></a>
 <div id="eventDiv" class="row" style="display: none;">
-    <div id="datesBlock" class="col-lg-1 col-md-2 col-sm-4 col-xs-12">
-        <span id="month" class="label label-primary text-center"></span><br />
-        <span id="days"></span>
+    <div id="eventDates" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <span id="month"></span>
+            </div>
+            <div class="panel-body text-center">
+                <span id="days"></span>
+            </div>
+        </div>
+        
     </div>
-    <div id="eventInfo" class="col-lg-3 col-md-4 col-sm-8 col-xs-12">
+    <div id="eventInfo" class="col-lg-3 col-md-4 col-sm-4 col-xs-8">
         <span id="eventName"></span><br />
         @*<span class="hidden-lg visible-md"><span id="eventSubTitle"></span><br /></span>*@
 
@@ -98,6 +112,6 @@
             <a href="#" class="btn btn-success">Register Now</a>
         </div>
     </div>
-    <div id="eventDesc" class="col-lg-8 col-md-6 hidden-sm hidden-xs text-muted">
+    <div id="eventDesc" class="col-lg-8 col-md-8 col-sm-5 hidden-xs text-muted">
     </div>
 </div>
